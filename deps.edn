@@ -1,0 +1,26 @@
+{:paths ["src" "resources"]
+ :deps  {org.clojure/clojure               {:mvn/version "1.10.3"}
+         nubank/matcher-combinators        {:mvn/version "3.5.0"}
+         org.postgresql/postgresql         {:mvn/version "42.2.10"}
+         com.zaxxer/HikariCP               {:mvn/version "3.3.1"}
+         com.github.seancorfield/next.jdbc {:mvn/version "1.2.780"}
+         ring/ring                         {:mvn/version "1.9.5"}
+         metosin/reitit                    {:mvn/version "0.5.18"}
+         org.slf4j/slf4j-api               {:mvn/version "1.6.2"}
+         org.slf4j/slf4j-log4j12           {:mvn/version "1.6.2"}
+         metosin/muuntaja                  {:mvn/version "0.6.8"}
+         integrant/integrant               {:mvn/version "0.8.0"}}
+ :aliases
+ {:run-m {:main-opts ["-m" "core"]}
+  :run-x {:ns-default core
+          :exec-fn    -main}
+  :build {:deps       {io.github.seancorfield/build-clj
+                       {:git/tag   "v0.6.3" :git/sha "9b8e09b"
+                        ;; since we're building an app uberjar, we do not
+                        ;; need deps-deploy for clojars.org deployment:
+                        :deps/root "slim"}}
+          :ns-default build}
+  :test  {:extra-paths ["test"]
+          :extra-deps  {org.clojure/test.check {:mvn/version "1.1.1"}
+                        io.github.cognitect-labs/test-runner
+                        {:git/tag "v0.5.0" :git/sha "48c3c67"}}}}}
